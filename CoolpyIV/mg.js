@@ -1,4 +1,5 @@
 ﻿var express = require('express');
+var validate = require('isvalid').validate;
 var basicAuth = require('basic-auth');
 var config = require('./config.js');
 var MongoClient = require('mongodb').MongoClient

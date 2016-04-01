@@ -38,10 +38,9 @@ if (config.redisState) {
     var rds = require('./rds.js');
     app.use('/rds', rds);
 }
-if (config.mongoState) {
-    var mgs = require('./mg.js');
-    app.use('/mgs', mgs);
-}
+
+var mgs = require('./mg.js');
+app.use('/ac', mgs);
 
 var fsio = require('./fsio.js');
 app.use("/fs", fsio);
