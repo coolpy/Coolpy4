@@ -12,7 +12,7 @@ function defaultContentTypeMiddleware(req, res, next) {
 }
 app.use(defaultContentTypeMiddleware);
 
-if (config.debug) {
+if (config.systemConfig.debug) {
     app.use(logger('dev'));
 }
 app.use(bodyParser.json());
@@ -28,13 +28,13 @@ app.all('*', function (req, res, next) {
     next();
 });
 
-if (config.whiteList[0] != '0.0.0.0/0') {
+if (config.systemConfig.whiteList[0] != '0.0.0.0/0') {
     var ipfilter = require('express-ipfilter');
     var setting = { mode: 'allow', log: false, errorCode: 403, errorMessage: '' };
-    app.use(ipfilter(config.whiteList, setting));
+    app.use(ipfilter(config.systemConfig.whiteList, setting));
 }
 
-if (config.redisState) {
+if (config.redisConfig.isEnable) {
     var rds = require('./rds.js');
     app.use('/rds', rds);
 }

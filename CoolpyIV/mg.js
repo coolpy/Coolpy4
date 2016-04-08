@@ -1,14 +1,14 @@
 ﻿var express = require('express');
 var isvalid = require('isvalid');
-var config = require('./config.json');
+var config = require('./config.json').mongoConfig;
 var uuid = require('uuid');
 var admin = require('./models/admin.js');
 var basicauth = require('./funs/auth.js');
-var MongoClient = require('mongodb').MongoClient
+var MongoClient = require('mongodb').MongoClient;
 var mongo;
-MongoClient.connect(config.mongo, {
+MongoClient.connect(config.address, {
     server: {
-        poolSize: config.mongoPoolSize
+        poolSize: config.poolSize
     }
 }, function (err, db) {
     if (err === null) {

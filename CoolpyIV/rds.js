@@ -1,8 +1,8 @@
 ﻿var express = require('express');
 var Redis = require('ioredis');
-var config = require('./config.json');
+var config = require('./config.json').redisConfig;
 
-var redis = new Redis(config.redis);
+var redis = new Redis(config.address);
 redis.on('connect', function () {
     console.log('redis state : ' + redis.status);
 });
@@ -63,7 +63,7 @@ module.exports = (function () {
     
     router.route('/list/bulk/:ln').post(function (req, res, next) {
         if (Array.isArray(req.body)) { 
-            var rds = new Redis(config.redis);
+            var rds = new Redis(config.address);
             for (var i = 0; i < req.body.length; i++) {
                 redis.lpush(req.params.ln, JSON.stringify(req.body[i]));
             }

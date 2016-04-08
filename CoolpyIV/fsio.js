@@ -1,11 +1,11 @@
 ﻿var express = require('express');
 var checker = require('./funs/checker.js');
-var config = require('./config.json');
+var config = require('./config.json').mongoConfig;
 var MongoClient = require('mongodb').MongoClient;
 var mongo;
-MongoClient.connect(config.mongo, {
+MongoClient.connect(config.address, {
     server: {
-        poolSize: config.mongoPoolSize
+        poolSize: config.poolSize
     }
 }, function (err, db) {
     if (err === null) {

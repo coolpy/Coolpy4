@@ -6,9 +6,9 @@ var app = require('./app.js');
 
 var ready = false;
 
-if (config.debug) {
-    http.createServer(app).listen(config.port);
-    console.log(config.appName + ' is start with port ' + config.port);
+if (config.systemConfig.debug) {
+    http.createServer(app).listen(config.systemConfig.port);
+    console.log(config.appName + ' is start with port ' + config.systemConfig.port);
 } else {
     if (cluster.isMaster) {
         console.log("main process running: pid=" + process.pid);
@@ -39,6 +39,6 @@ if (config.debug) {
         });
     } else {
         app.listen(8080);
-        console.log(config.appName + ' is start with port ' + config.port + ' pid ' + cluster.worker.id);
+        console.log(config.appName + ' is start with port ' + config.systemConfig.port + ' pid ' + cluster.worker.id);
     }
 }
