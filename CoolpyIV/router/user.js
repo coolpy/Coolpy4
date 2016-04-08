@@ -4,6 +4,8 @@
 
 var express = require("express");
 var basicAuth = require('./../funs/auth.js');
+var mongo = require("./../middleware/mongo.js");
+var isvalid = require("isvalid");
 
 var router = express.Router({ mergeParams: true });
 
