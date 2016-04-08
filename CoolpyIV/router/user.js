@@ -3,6 +3,7 @@
  */
 
 var express = require("express");
+var basicauth = require('./../funs/auth.js');
 
 var router = express.Router({ mergeParams: true });
 
