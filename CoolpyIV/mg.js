@@ -2,10 +2,9 @@
 var isvalid = require('isvalid');
 var basicAuth = require('basic-auth');
 var config = require('./config.json');
-var MongoClient = require('mongodb').MongoClient;
 var uuid = require('uuid');
 var admin = require('./models/admin.js');
-var MongoClient = require('mongodb').MongoClient
+var MongoClient = require('mongodb').MongoClient;
 var mongo;
 MongoClient.connect(config.mongo, {
     server: {
