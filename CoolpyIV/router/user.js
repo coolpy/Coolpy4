@@ -1,9 +1,9 @@
 /**
- * Created by bileskou on 16/4/8.
+ * Created by biles on 16/4/8.
  */
 
 var express = require("express");
-var basicauth = require('./../funs/auth.js');
+var basicAuth = require('./../funs/auth.js');
 
 var router = express.Router({ mergeParams: true });
 
@@ -84,7 +84,7 @@ router.route('/users/:id?')
             });
         }
     })
-    .delete(basicauth, function (req, res, next) {
+    .delete(basicAuth, function (req, res, next) {
         if (req.params.id) {
             mongo.db('coolpy').collection('users').deleteOne({ 'userId': req.params.id }, function (err, doc) {
                 if (err) {
