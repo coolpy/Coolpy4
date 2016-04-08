@@ -6,6 +6,9 @@ var express = require("express");
 var basicAuth = require('./../funs/auth.js');
 var mongo = require("./../middleware/mongo.js");
 var isvalid = require("isvalid");
+var uuid = require("uuid");
+var admin = require('./../models/admin.js');
+
 
 var router = express.Router({ mergeParams: true });
 
