@@ -1,6 +1,5 @@
 ﻿var express = require('express');
 var isvalid = require('isvalid');
-var basicAuth = require('basic-auth');
 var config = require('./config.json');
 var uuid = require('uuid');
 var admin = require('./models/admin.js');
