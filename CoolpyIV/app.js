@@ -41,6 +41,9 @@ if (config.redisConfig.isEnable) {
 
 var mgs = require('./mg.js');
 app.use('/ac', mgs);
+var user = require("./router/user.js");
+app.use("/ac",user);
+
 
 //var fsio = require('./fsio.js');
 //app.use("/fs", fsio);

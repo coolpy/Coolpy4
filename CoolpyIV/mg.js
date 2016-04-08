@@ -8,8 +8,8 @@ var mongo = require("./middleware/mongo.js");
 module.exports = (function () {
     'use strict';
     var router = express.Router({ mergeParams: true });    
-    
-    router.route('/users/:id?')
+
+    /*router.route('/users/:id?')
     .post(function (req, res, next) {
         isvalid(req.body, admin, function (err, validData) {
             if (err) {
@@ -103,7 +103,7 @@ module.exports = (function () {
                 }
             });
         }
-    });
+    });*/
     
     router.route('/update').post(basicauth, function (req, res, next) {
         if (req.body.hasOwnProperty('filter') && req.body.hasOwnProperty('update')) {
