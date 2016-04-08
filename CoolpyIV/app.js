@@ -42,8 +42,8 @@ if (config.redisState) {
 var mgs = require('./mg.js');
 app.use('/ac', mgs);
 
-var fsio = require('./fsio.js');
-app.use("/fs", fsio);
+//var fsio = require('./fsio.js');
+//app.use("/fs", fsio);
 
 
 // catch 404 and forward to error handler
