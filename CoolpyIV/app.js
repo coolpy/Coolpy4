@@ -3,7 +3,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
 var Redis = require('ioredis');
-var config = require('./config.js');
+var config = require('./config.json');
 var app = express();
 
 function defaultContentTypeMiddleware(req, res, next) {
@@ -28,10 +28,10 @@ app.all('*', function (req, res, next) {
     next();
 });
 
-if (config.whitelist[0] != '0.0.0.0/0') {
+if (config.whiteList[0] != '0.0.0.0/0') {
     var ipfilter = require('express-ipfilter');
     var setting = { mode: 'allow', log: false, errorCode: 403, errorMessage: '' };
-    app.use(ipfilter(config.whitelist, setting));
+    app.use(ipfilter(config.whiteList, setting));
 }
 
 if (config.redisState) {
@@ -55,8 +55,8 @@ app.use(function (req, res, next) {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function (err, req, res, next) {
-    res.status(err.status || 500);
+app.use(function (err, req, res) {
+    res.status(500 || err.status);
     res.json({ ok: 0, n: 0, err: err.message });
 });
 
