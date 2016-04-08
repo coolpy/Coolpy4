@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="app.js" />
+    <Compile Include="funs\auth.js" />
     <Compile Include="funs\checker.js" />
     <Compile Include="config.js" />
     <Compile Include="fsio.js" />

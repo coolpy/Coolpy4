@@ -1,9 +1,9 @@
 ﻿var express = require('express');
 var isvalid = require('isvalid');
-var basicAuth = require('basic-auth');
 var uuid = require('uuid');
 var config = require('./config.js');
 var admin = require('./models/admin.js');
+var basicauth = require('./funs/auth.js');
 var MongoClient = require('mongodb').MongoClient
 var mongo;
 MongoClient.connect(config.mongo, {
@@ -21,23 +21,6 @@ MongoClient.connect(config.mongo, {
 
 module.exports = (function () {
     'use strict';
-    
-    var auth = function (req, res, next) {
-        function unauthorized(res) {
-            res.set('WWW-Authenticate', 'Basic realm=Authorization Required');
-            return res.sendStatus(401);
-        };
-        var user = basicAuth(req);
-        if (!user || !user.name || !user.pass) {
-            return unauthorized(res);
-        };
-        if (user.name === 'foo' && user.pass === 'bar') {
-            return next();
-        } else {
-            return unauthorized(res);
-        };
-    };
-    
     var router = express.Router({ mergeParams: true });    
     
     router.route('/users/:id?')
@@ -117,7 +100,7 @@ module.exports = (function () {
             });
         }
     })
-    .delete(function (req, res, next) {
+    .delete(basicauth, function (req, res, next) {
         if (req.params.id) {
             mongo.db('coolpy').collection('users').deleteOne({ 'userId': req.params.id }, function (err, doc) {
                 if (err) {
@@ -136,7 +119,7 @@ module.exports = (function () {
         }
     });
     
-    router.route('/update').post(auth, function (req, res, next) {
+    router.route('/update').post(basicauth, function (req, res, next) {
         if (req.body.hasOwnProperty('filter') && req.body.hasOwnProperty('update')) {
             var db = req.params.db;
             var coll = req.params.coll;
