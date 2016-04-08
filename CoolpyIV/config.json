@@ -1,0 +1,15 @@
+﻿{
+    "mongoState": false,
+    "mongoPoolSize": 100,
+    "mongo" : "mongodb://localhost:27017",
+    "redisState": false,
+    "redis" : "redis://:jacle169@127.0.0.1:6379/2",
+    "debug" : true,
+    "port": 8080,
+    "version": "0.1.0",
+    "formFileTypes": [".jpg", ".png", ".zip", ".iso"],
+    "appName": "CoolpyIV",
+    "whiteList": [
+        "0.0.0.0/0", "::ffff:127.0.0.1"
+    ]
+}

@@ -1,6 +1,6 @@
 ﻿var express = require('express');
 var Redis = require('ioredis');
-var config = require('./config.js');
+var config = require('./config.json');
 
 var redis = new Redis(config.redis);
 redis.on('connect', function () {
@@ -66,7 +66,7 @@ module.exports = (function () {
             var rds = new Redis(config.redis);
             for (var i = 0; i < req.body.length; i++) {
                 redis.lpush(req.params.ln, JSON.stringify(req.body[i]));
-            };
+            }
             res.json({ ok: 1, n : req.body.length });
         } else {
             res.json({ ok: 0, n : 0, err : 'only arrays' });

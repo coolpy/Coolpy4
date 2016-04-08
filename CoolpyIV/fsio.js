@@ -1,7 +1,7 @@
 ﻿var express = require('express');
 var checker = require('./funs/checker.js');
-var config = require('./config.js');
-var MongoClient = require('mongodb').MongoClient
+var config = require('./config.json');
+var MongoClient = require('mongodb').MongoClient;
 var mongo;
 MongoClient.connect(config.mongo, {
     server: {
@@ -27,7 +27,7 @@ module.exports = (function () {
             res.json({ ok: 0, n: 0, err: 'file extname err' });
             return;
         }
-        if (!checker.contains.call(config.formfileTyps, ext)) {
+        if (!checker.contains.call(config.formFileTypes, ext)) {
             res.json({ ok: 0, n: 0, err: 'invalid file type' });
             return;
         }

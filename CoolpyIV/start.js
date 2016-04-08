@@ -1,6 +1,6 @@
 ﻿var http = require('http');
 var cluster = require('cluster');
-var config = require('./config.js');
+var config = require('./config.json');
 var fs = require('fs');
 var app = require('./app.js');
 
@@ -12,8 +12,8 @@ if (config.debug) {
 } else {
     if (cluster.isMaster) {
         console.log("main process running: pid=" + process.pid);
-        var cpus = require('os').cpus().length
-        var procs = Math.ceil(0.8 * cpus)
+        var cpus = require('os').cpus().length;
+        var procs = Math.ceil(0.8 * cpus);
         for (var i = 0; i < procs; i++) cluster.fork();
         cluster.on("exit", function (worker, code) {
             if (code != 0) {
@@ -32,7 +32,7 @@ if (config.debug) {
                         console.log("Killing " + workers[i]);
                         cluster.workers[workers[i]].disconnect();
                         cluster.fork();
-                    };
+                    }
                     ready = false;
                 }, 10000);
             }

@@ -32,7 +32,7 @@
   <ItemGroup>
     <Compile Include="app.js" />
     <Compile Include="funs\checker.js" />
-    <Compile Include="config.js" />
+    <Compile Include="config.json" />
     <Compile Include="fsio.js" />
     <Compile Include="mg.js" />
     <Compile Include="models\admin.js" />
