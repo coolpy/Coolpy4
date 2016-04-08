@@ -1,23 +1,9 @@
 ﻿var express = require('express');
 var isvalid = require('isvalid');
-var config = require('./config.json').mongoConfig;
 var uuid = require('uuid');
 var admin = require('./models/admin.js');
 var basicauth = require('./funs/auth.js');
-var MongoClient = require('mongodb').MongoClient;
-var mongo;
-MongoClient.connect(config.address, {
-    server: {
-        poolSize: config.poolSize
-    }
-}, function (err, db) {
-    if (err === null) {
-        mongo = db;
-        console.log("Connected correctly to server");
-    } else {
-        console.log("Connect Error " + err);
-    }
-});
+var mongo = require("./middleware/mongo.js");
 
 module.exports = (function () {
     'use strict';

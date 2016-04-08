@@ -1,20 +1,8 @@
 ﻿var express = require('express');
 var checker = require('./funs/checker.js');
 var config = require('./config.json').mongoConfig;
-var MongoClient = require('mongodb').MongoClient;
-var mongo;
-MongoClient.connect(config.address, {
-    server: {
-        poolSize: config.poolSize
-    }
-}, function (err, db) {
-    if (err === null) {
-        mongo = db;
-        console.log("Connected correctly to server");
-    } else {
-        console.log("Connect Error " + err);
-    }
-});
+var mongo = require("./middleware/mongo.js");
+var mongodb = require("mongodb");
 
 module.exports = (function () {
     'use strict';
