@@ -2,7 +2,6 @@
 var path = require('path');
 var bodyParser = require('body-parser');
 var logger = require('morgan');
-var Redis = require('ioredis');
 var config = require('./config.json');
 var app = express();
 

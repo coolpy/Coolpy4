@@ -9,7 +9,6 @@ var isvalid = require("isvalid");
 var uuid = require("uuid");
 var admin = require('./../models/admin.js');
 
-
 var router = express.Router({ mergeParams: true });
 
 router.route('/users/:id?')
@@ -19,7 +18,7 @@ router.route('/users/:id?')
                 res.json({ ok: 0, n : 0, err : err });
             } else {
                 validData.ukey = uuid.v4();
-                var mgo = mongo.db('coolpy').collection('users');
+                var mgo = mongo().db('coolpy').collection('users');
                 mgo.findOne({ 'userId': validData.userId }, function (err, doc) {
                     if (err) {
                         res.json({ ok: 0, n : 0, err : err });
@@ -46,7 +45,7 @@ router.route('/users/:id?')
                 res.json({ ok: 0, n : 0, err : err });
             } else {
                 delete validData.ukey;
-                var mgo = mongo.db('coolpy').collection('users');
+                var mgo = mongo().db('coolpy').collection('users');
                 var filter = Object();
                 filter.userId = validData.userId;
                 mgo.findOne(filter, function (err, doc) {
@@ -73,7 +72,7 @@ router.route('/users/:id?')
     })
     .get(function (req, res, next) {
         if (req.params.id) {
-            mongo.db('coolpy').collection('users').findOne({ 'userId': req.params.id }, function (err, doc) {
+            mongo().db('coolpy').collection('users').findOne({ 'userId': req.params.id }, function (err, doc) {
                 if (err) {
                     res.json({ ok: 0, n : 0, err : err });
                 } else {
@@ -91,7 +90,7 @@ router.route('/users/:id?')
     })
     .delete(basicAuth, function (req, res, next) {
         if (req.params.id) {
-            mongo.db('coolpy').collection('users').deleteOne({ 'userId': req.params.id }, function (err, doc) {
+            mongo().db('coolpy').collection('users').deleteOne({ 'userId': req.params.id }, function (err, doc) {
                 if (err) {
                     res.json({ ok: 0, n : 0, err : err });
                 } else {

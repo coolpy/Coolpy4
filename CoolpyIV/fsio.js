@@ -19,7 +19,7 @@ module.exports = (function () {
             res.json({ ok: 0, n: 0, err: 'invalid file type' });
             return;
         }
-        var bucket = new mongodb.GridFSBucket(mongo.db('q1fs'), { bucketName: req.params.bucket });
+        var bucket = new mongodb.GridFSBucket(mongo().db()('q1fs'), { bucketName: req.params.bucket });
         bucket.find({ filename: req.params.fn }).toArray(function (err, files) {
             if (files.length === 0) {
                 var opt = { contentType: mime.lookup(req.params.fn), metadata: { auth: "user" } };
@@ -37,7 +37,7 @@ module.exports = (function () {
     
     router.route('/dlfn/:fn').get(function (req, res, next) {
         //var throttle = new Throttle(1024*1024);
-        var bucket = new mongodb.GridFSBucket(mongo.db('q1fs'));
+        var bucket = new mongodb.GridFSBucket(mongo().db('q1fs'));
         bucket.find({ filename: req.params.fn }).toArray(function (err, files) {
             if (files.length > 0) {
                 if (req.headers.range) {
@@ -61,7 +61,7 @@ module.exports = (function () {
     });
     
     router.route('/dlid/:id').get(function (req, res, next) {
-        var bucket = new mongodb.GridFSBucket(mongo.db('q1fs'));
+        var bucket = new mongodb.GridFSBucket(mongo().db('q1fs'));
         var o_id = new mongodb.ObjectID(req.params.id);
         bucket.find({ _id : o_id }).toArray(function (err, files) {
             if (files.length > 0) {
@@ -85,7 +85,7 @@ module.exports = (function () {
         });
     });
     router.route('/mg/del/:id').get(function (req, res, next) {
-        var bucket = new mongodb.GridFSBucket(mongo.db('q1fs'));
+        var bucket = new mongodb.GridFSBucket(mongo().db('q1fs'));
         var o_id = new mongodb.ObjectID(req.params.id);
         bucket.delete(o_id, function (error) {
             if (error) {
@@ -97,7 +97,7 @@ module.exports = (function () {
     });
     
     router.route('/mg/drop').get(function (req, res, next) {
-        var bucket = new mongodb.GridFSBucket(mongo.db('q1fs'));
+        var bucket = new mongodb.GridFSBucket(mongo().db('q1fs'));
         bucket.drop(function (error) {
             if (error) {
                 res.json({ ok: 0, n: 0, err: error });

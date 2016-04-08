@@ -4,7 +4,7 @@
 
 var mongoConfig = require('./../config.json').mongoConfig;
 var MongoClient = require('mongodb').MongoClient;
-var mongo = null;
+var mongo;
 
 MongoClient.connect(mongoConfig.address, {
     server: {
@@ -19,4 +19,6 @@ MongoClient.connect(mongoConfig.address, {
     }
 });
 
-module.exports = mongo;
+module.exports = function(){
+    return mongo;
+};

@@ -7,7 +7,7 @@ var mongo = require("./middleware/mongo.js");
 
 module.exports = (function () {
     'use strict';
-    var router = express.Router({ mergeParams: true });    
+    var router = express.Router({ mergeParams: true });
 
     /*router.route('/users/:id?')
     .post(function (req, res, next) {
@@ -109,7 +109,7 @@ module.exports = (function () {
         if (req.body.hasOwnProperty('filter') && req.body.hasOwnProperty('update')) {
             var db = req.params.db;
             var coll = req.params.coll;
-            mongo.db(db).collection(coll).updateMany(req.body.filter, req.body.update, function (err, r) {
+            mongo().db(db).collection(coll).updateMany(req.body.filter, req.body.update, function (err, r) {
                 if (err) {
                     res.json({ ok: 0, n : 0, err : err });
                 } else {
@@ -125,7 +125,7 @@ module.exports = (function () {
         if (req.body.hasOwnProperty('filter')) {
             var db = req.params.db;
             var coll = req.params.coll;
-            mongo.db(db).collection(coll).deleteMany(req.body.filter, function (err, r) {
+            mongo().db(db).collection(coll).deleteMany(req.body.filter, function (err, r) {
                 if (err) {
                     res.json({ ok: 0, n : 0, err : err });
                 } else {
@@ -140,7 +140,7 @@ module.exports = (function () {
     router.route('/drop/:db/:coll').get(function (req, res, next) {
         var db = req.params.db;
         var coll = req.params.coll;
-        mongo.db(db).collection(coll).drop(function (err, r) {
+        mongo().db(db).collection(coll).drop(function (err, r) {
             if (err) {
                 res.json({ ok: 0, n : 0, err : err });
             } else {
@@ -158,7 +158,7 @@ module.exports = (function () {
             if (isNaN(skip) || isNaN(limit)) {
                 res.json({ ok: 0, n : 0, err: "params type err" });
             } else {
-                mongo.db(db).collection(coll).find(req.body.filter).skip(skip).limit(limit).toArray(function (err, r) {
+                mongo().db(db).collection(coll).find(req.body.filter).skip(skip).limit(limit).toArray(function (err, r) {
                     if (err) {
                         res.json({ ok: 0, n : 0, err : err });
                     } else {
@@ -183,7 +183,7 @@ module.exports = (function () {
             if (isNaN(skip) || isNaN(limit)) {
                 res.json({ ok: 0, n : 0, err: "params type err" });
             } else {
-                mongo.db(db).collection(coll).find(req.body.filter, role).skip(skip).limit(limit).toArray(function (err, r) {
+                mongo().db(db).collection(coll).find(req.body.filter, role).skip(skip).limit(limit).toArray(function (err, r) {
                     if (err) {
                         res.json({ ok: 0, n : 0, err : err });
                     } else {
@@ -199,7 +199,7 @@ module.exports = (function () {
     router.route('/clear/:db/:coll').get(function (req, res, next) {
         var db = req.params.db;
         var coll = req.params.coll;
-        mongo.db(db).collection(coll).removeMany(function (err, r) {
+        mongo().db(db).collection(coll).removeMany(function (err, r) {
             if (err) {
                 res.json({ ok: 0, n : 0, err : err });
             } else {
@@ -215,7 +215,7 @@ module.exports = (function () {
             }
             var db = req.params.db;
             var coll = req.params.coll;
-            mongo.db(db).collection(coll).ensureIndex(req.body.index, req.body.options, function (err, indexName) {
+            mongo().db(db).collection(coll).ensureIndex(req.body.index, req.body.options, function (err, indexName) {
                 if (err) {
                     res.json({ ok: 0, n : 0, err : err });
                 } else {
@@ -230,7 +230,7 @@ module.exports = (function () {
     router.route('/idx/:db/:coll/:idx').get(function (req, res, next) {
         var db = req.params.db;
         var coll = req.params.coll;
-        mongo.db(db).collection(coll).dropIndex(req.params.idx, function (err, r) {
+        mongo().db(db).collection(coll).dropIndex(req.params.idx, function (err, r) {
             if (err) {
                 res.json({ ok: 0, n : 0, err : err });
             } else {
