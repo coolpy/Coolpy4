@@ -1,8 +1,8 @@
 ﻿module.exports = {
-    ukey: { type: String, unique: true },
-    userId: { type: String, required: true, validate: strLenValidator, unique: true },
-    pwd: { type: String, required: true , validate: strLenValidator },
-    userName: { type: String, required: true , validate: strLenValidator },
-    email: { type: String, required: true , validate: strLenValidator },
-    qq: { type: String, required: true , validate: strLenValidator }
+    ukey: { type: String },
+    userId: { type: String, required: true },
+    pwd: { type: String, required: true },
+    userName: { type: String, required: true },
+    email: { type: String, required: true },
+    qq: { type: String, required: true }
 };
