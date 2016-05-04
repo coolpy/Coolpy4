@@ -38,8 +38,8 @@ if (config.redisConfig.isEnable) {
     app.use('/rds', rds);
 }
 
-var mgs = require('./mg.js');
-app.use('/ac', mgs);
+//var mgs = require('./mg.js');
+//app.use('/ac', mgs);
 var user = require("./router/user.js");
 app.use("/ac",user);
 

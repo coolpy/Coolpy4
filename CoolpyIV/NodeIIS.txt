@@ -1,0 +1,5 @@
+﻿安装顺序不能错乱
+1.IIS
+2.node.js
+3.nodeiis
+4.url rewrite
